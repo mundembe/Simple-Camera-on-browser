@@ -4,7 +4,7 @@ async function initCamera () {
     try {
         const stream = await navigator.mediaDevices.getUserMedia(
             {
-                video: {width: 1250, height: 720},
+                video: true,
                 audio: false
             }
         );
@@ -15,3 +15,4 @@ async function initCamera () {
 }
 
 initCamera();
+
