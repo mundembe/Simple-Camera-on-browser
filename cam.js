@@ -15,6 +15,7 @@ async function startCamera () {
         pausePlayBtn.innerText = "Play"
         stopCameraBtn.innerText = "Stop Camera"
         video.hidden = true;
+        pausePlay();
     } catch (error) {
         console.log("Camera access denied");
     }
@@ -31,7 +32,7 @@ function stopCamera() {
     }
 }
 
-pausePlayBtn.addEventListener('click', ()=>{
+function pausePlay(){
     if (video.paused) {
         video.play();
         video.hidden = false;
@@ -41,6 +42,10 @@ pausePlayBtn.addEventListener('click', ()=>{
         video.hidden = true;
         pausePlayBtn.innerText = "Play";
     }
+}
+
+pausePlayBtn.addEventListener('click', ()=>{
+    pausePlay();
 })
 
 stopCameraBtn.addEventListener('click', () => {
@@ -50,6 +55,12 @@ stopCameraBtn.addEventListener('click', () => {
     } else {
         startCamera();
         pausePlayBtn.hidden = false;
+    }
+})
+
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden && stream){
+        stopCamera();
     }
 })
 
